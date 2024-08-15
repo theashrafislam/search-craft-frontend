@@ -1,10 +1,17 @@
-import React from 'react';
+import Banner from "../Components/Banner";
+import Features from "../Components/Features";
+import GetStarted from "../Components/GetStarted";
+import UserProfile from "../Components/UserProfile";
 
 const Home = () => {
     return (
-        <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold">Home Page</h1>
-            <p>Welcome to the Home Page!</p>
+        <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col justify-center items-center">
+            <Banner />
+            <main className="flex flex-col items-center text-center py-12">
+                <Features />
+                <GetStarted />
+                <UserProfile />
+            </main>
         </div>
     );
 };
