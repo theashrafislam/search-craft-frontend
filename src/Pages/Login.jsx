@@ -2,10 +2,13 @@ import { useContext, useState } from 'react';
 import { IoMdEyeOff } from 'react-icons/io';
 import { IoEye } from 'react-icons/io5';
 import { AuthContext } from '../Provider/AuthProvider';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const { createUserUsingEmailPassword } = useContext(AuthContext);
+    const { loginUsingEmailPassword } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     const handleLoginForm = (e) => {
         e.preventDefault();
@@ -13,12 +16,13 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
-        createUserUsingEmailPassword(email, password)
+        loginUsingEmailPassword(email, password)
             .then(result => {
-                
+                toast.success('Login successful. You are now connected.');
+                navigate('/')
             })
             .catch(error => {
-                console.log(error);
+                toast.error('Your login attempt failed. Ensure your details are correct and try again.');
             })
     };
 

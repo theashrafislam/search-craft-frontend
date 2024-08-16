@@ -1,17 +1,35 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { IoMdEyeOff } from 'react-icons/io';
 import { IoEye } from 'react-icons/io5';
+import { AuthContext } from '../Provider/AuthProvider';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+    const { createUserUsingEmailPassword, userSignOut } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     const handleRegisterForm = (e) => {
         e.preventDefault();
         const form = e.target;
-        const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, email, password);
+
+        createUserUsingEmailPassword(email, password)
+            .then(result => {
+                toast.success('Thank you for registering. Your account has been created successfully.');
+                userSignOut()
+                    .then(result => {
+                        navigate('/login');
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            })
+            .catch(error => {
+                toast.error('Registration was not successful. Please ensure all details are correct and try again.')
+            })
     };
 
     return (
@@ -19,17 +37,6 @@ const Register = () => {
             <div className="w-full max-w-md p-8 bg-white shadow-2xl rounded-2xl">
                 <h2 className="text-3xl font-extrabold mb-6 text-center text-gray-900">Create an Account</h2>
                 <form onSubmit={handleRegisterForm} className="space-y-6">
-                    <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            required
-                            placeholder="Enter your name"
-                            className="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                        />
-                    </div>
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
                         <input
