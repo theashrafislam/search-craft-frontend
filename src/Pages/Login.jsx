@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { IoMdEyeOff } from 'react-icons/io';
 import { IoEye } from 'react-icons/io5';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Login = () => {
+    const { createUserUsingEmailPassword } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
 
     const handleLoginForm = (e) => {
@@ -11,6 +13,13 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+        createUserUsingEmailPassword(email, password)
+            .then(result => {
+                
+            })
+            .catch(error => {
+                console.log(error);
+            })
     };
 
     return (
