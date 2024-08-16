@@ -4,9 +4,10 @@ import { IoEye } from 'react-icons/io5';
 import { AuthContext } from '../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
-    const { loginUsingEmailPassword } = useContext(AuthContext);
+    const { loginUsingEmailPassword, loginWithGoogle } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
@@ -23,6 +24,17 @@ const Login = () => {
             })
             .catch(error => {
                 toast.error('Your login attempt failed. Ensure your details are correct and try again.');
+            });
+    };
+
+    const handleGoogleLogin = () => {
+        loginWithGoogle()
+            .then(result => {
+                toast.success('Login successful. You are now connected.');
+                navigate('/')
+            })
+            .catch(error => {
+                toast.error('Your login attempt failed. Ensure your details are correct and try again.');
             })
     };
 
@@ -30,6 +42,7 @@ const Login = () => {
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
             <div className="w-full max-w-md p-8 bg-white shadow-2xl rounded-2xl">
                 <h2 className="text-3xl font-extrabold mb-6 text-center text-gray-900">Welcome Back</h2>
+
                 <form onSubmit={handleLoginForm} className="space-y-6">
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
@@ -68,6 +81,13 @@ const Login = () => {
                         className="w-full py-3 px-6 rounded-lg bg-purple-600 text-white font-semibold hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-transform transform hover:scale-105"
                     >
                         Login
+                    </button>
+                    <button
+                        onClick={handleGoogleLogin}
+                        className="w-full py-3 px-6 rounded-lg bg-white text-gray-800 border border-gray-300 font-semibold hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition-transform transform hover:scale-105 mb-6 flex items-center justify-center"
+                    >
+                        <FcGoogle className='text-2xl'/>
+                        Login with Google
                     </button>
                     <p className="text-center text-gray-600 mt-6">
                         Don't have an account?{' '}

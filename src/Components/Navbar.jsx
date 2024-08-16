@@ -57,22 +57,26 @@ const Navbar = () => {
                             </NavLink>
                         </>
                     }
-                    <NavLink
-                        to="/login"
-                        className={({ isActive }) =>
-                            isActive ? 'text-gray-300 border-b-2 border-white' : 'hover:text-gray-300'
-                        }
-                    >
-                        Login
-                    </NavLink>
-                    <NavLink
-                        to="/register"
-                        className={({ isActive }) =>
-                            isActive ? 'text-gray-300 border-b-2 border-white' : 'hover:text-gray-300'
-                        }
-                    >
-                        Register
-                    </NavLink>
+                    {
+                        !user && <>
+                            <NavLink
+                                to="/login"
+                                className={({ isActive }) =>
+                                    isActive ? 'text-gray-300 border-b-2 border-white' : 'hover:text-gray-300'
+                                }
+                            >
+                                Login
+                            </NavLink>
+                            <NavLink
+                                to="/register"
+                                className={({ isActive }) =>
+                                    isActive ? 'text-gray-300 border-b-2 border-white' : 'hover:text-gray-300'
+                                }
+                            >
+                                Register
+                            </NavLink>
+                        </>
+                    }
                     {
                         user && <NavLink
                             onClick={handleSignOut}
@@ -123,24 +127,28 @@ const Navbar = () => {
                             Products
                         </NavLink>
                     }
-                    <NavLink
-                        to="/login"
-                        className={({ isActive }) =>
-                            isActive ? 'block py-2 px-4 text-sm bg-blue-700' : 'block py-2 px-4 text-sm hover:bg-blue-700'
-                        }
-                        onClick={toggleMenu}
-                    >
-                        Login
-                    </NavLink>
-                    <NavLink
-                        to="/register"
-                        className={({ isActive }) =>
-                            isActive ? 'block py-2 px-4 text-sm bg-blue-700' : 'block py-2 px-4 text-sm hover:bg-blue-700'
-                        }
-                        onClick={toggleMenu}
-                    >
-                        Register
-                    </NavLink>
+                    {
+                        !user && <>
+                            <NavLink
+                                to="/login"
+                                className={({ isActive }) =>
+                                    isActive ? 'block py-2 px-4 text-sm bg-blue-700' : 'block py-2 px-4 text-sm hover:bg-blue-700'
+                                }
+                                onClick={toggleMenu}
+                            >
+                                Login
+                            </NavLink>
+                            <NavLink
+                                to="/register"
+                                className={({ isActive }) =>
+                                    isActive ? 'block py-2 px-4 text-sm bg-blue-700' : 'block py-2 px-4 text-sm hover:bg-blue-700'
+                                }
+                                onClick={toggleMenu}
+                            >
+                                Register
+                            </NavLink>
+                        </>
+                    }
                     {
                         user && <NavLink
                             to="/profile"
