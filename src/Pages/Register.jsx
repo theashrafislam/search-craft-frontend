@@ -4,9 +4,10 @@ import { IoEye } from 'react-icons/io5';
 import { AuthContext } from '../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
 
 const Register = () => {
-    const { createUserUsingEmailPassword, userSignOut } = useContext(AuthContext);
+    const { createUserUsingEmailPassword, userSignOut, loginWithGoogle } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
@@ -29,6 +30,17 @@ const Register = () => {
             })
             .catch(error => {
                 toast.error('Registration was not successful. Please ensure all details are correct and try again.')
+            })
+    };
+
+    const handleGoogleLogin = () => {
+        loginWithGoogle()
+            .then(result => {
+                toast.success('Login successful. You are now connected.');
+                navigate('/')
+            })
+            .catch(error => {
+                toast.error('Your login attempt failed. Ensure your details are correct and try again.');
             })
     };
 
@@ -74,6 +86,13 @@ const Register = () => {
                         className="w-full py-3 px-6 rounded-lg bg-purple-600 text-white font-semibold hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-transform transform hover:scale-105"
                     >
                         Register
+                    </button>
+                    <button
+                        onClick={handleGoogleLogin}
+                        className="w-full py-3 px-6 rounded-lg bg-white text-gray-800 border border-gray-300 font-semibold hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition-transform transform hover:scale-105 mb-6 flex items-center justify-center"
+                    >
+                        <FcGoogle className='text-2xl'/>
+                        Login with Google
                     </button>
                     <p className="text-center text-gray-600 mt-6">
                         Already have an account?{' '}
