@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaFacebook, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -44,17 +45,14 @@ const Footer = () => {
         <div>
           <h3 className="text-white text-lg font-semibold mb-4">Follow Us</h3>
           <div className="flex space-x-4">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-              <i className="fab fa-facebook-f"></i>
+            <a href="www.facebook.com/theashrafislam" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <FaFacebook className='text-2xl'/>
             </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-              <i className="fab fa-twitter"></i>
+            <a href="www.github.com/theashrafislam" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <FaGithub className='text-2xl'/>
             </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-              <i className="fab fa-instagram"></i>
+            <a href="https://www.linkedin.com/in/theashrafislam/" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <FaLinkedin className='text-2xl'/>
             </a>
           </div>
         </div>

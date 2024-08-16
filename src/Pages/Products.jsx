@@ -14,10 +14,10 @@ const Products = () => {
         minPrice: '',
         maxPrice: ''
     });
-    const [sort, setSort] = useState('price'); // Default sort by price
-    const [order, setOrder] = useState('asc'); // Default order ascending
+    const [sort, setSort] = useState('price');
+    const [order, setOrder] = useState('asc');
     const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1); // To handle total pages
+    const [totalPages, setTotalPages] = useState(1);
     const itemsPerPage = 10;
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const Products = () => {
     }, [filters, sort, order, page]);
 
     const handleSearch = () => {
-        setPage(1); // Reset to page 1 whenever a new search is performed
+        setPage(1);
         const fetchProducts = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/information', {
@@ -73,7 +73,7 @@ const Products = () => {
         const [sortBy, orderBy] = e.target.value.split('-');
         setSort(sortBy);
         setOrder(orderBy);
-        setPage(1); // Reset to page 1 whenever the sort option is changed
+        setPage(1);
     };
 
     const handlePageChange = (newPage) => {
