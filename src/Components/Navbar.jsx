@@ -1,12 +1,26 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
+
+    const { user, userSignOut } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+
+    const handleSignOut = () => {
+        userSignOut()
+            .then(result => {
+                toast.success('Successfully signed out. You are now logged out.');
+            })
+            .catch(error => {
+                toast.error('Sign-out attempt unsuccessful. Please try again.');
+            })
+    }
 
     return (
         <nav className="bg-blue-900 text-white shadow-lg">
@@ -14,7 +28,7 @@ const Navbar = () => {
                 <div className="text-2xl font-bold">
                     <NavLink to="/">Search Craft</NavLink>
                 </div>
-                <div className="hidden md:flex space-x-6">
+                <div className="hidden md:flex items-center space-x-6">
                     <NavLink
                         to="/"
                         className={({ isActive }) =>
@@ -23,14 +37,26 @@ const Navbar = () => {
                     >
                         Home
                     </NavLink>
-                    <NavLink
-                        to="/products"
-                        className={({ isActive }) =>
-                            isActive ? 'text-gray-300 border-b-2 border-white' : 'hover:text-gray-300'
-                        }
-                    >
-                        Products
-                    </NavLink>
+                    {
+                        user && <>
+                            <NavLink
+                                to="/products"
+                                className={({ isActive }) =>
+                                    isActive ? 'text-gray-300 border-b-2 border-white' : 'hover:text-gray-300'
+                                }
+                            >
+                                Products
+                            </NavLink>
+                            <NavLink
+                                to="/profile"
+                                className={({ isActive }) =>
+                                    isActive ? 'text-gray-300 border-b-2 border-white' : 'hover:text-gray-300'
+                                }
+                            >
+                                Profile
+                            </NavLink>
+                        </>
+                    }
                     <NavLink
                         to="/login"
                         className={({ isActive }) =>
@@ -47,14 +73,14 @@ const Navbar = () => {
                     >
                         Register
                     </NavLink>
-                    <NavLink
-                        to="/profile"
-                        className={({ isActive }) =>
-                            isActive ? 'text-gray-300 border-b-2 border-white' : 'hover:text-gray-300'
-                        }
-                    >
-                        Profile
-                    </NavLink>
+                    {
+                        user && <NavLink
+                            onClick={handleSignOut}
+                            className={'hover:bg-blue-700 bg-red-500 px-3 py-2 rounded-lg'}
+                        >
+                            Sign Out
+                        </NavLink>
+                    }
                 </div>
                 <div className="md:hidden">
                     <button onClick={toggleMenu} className="text-2xl focus:outline-none">
@@ -86,15 +112,17 @@ const Navbar = () => {
                     >
                         Home
                     </NavLink>
-                    <NavLink
-                        to="/products"
-                        className={({ isActive }) =>
-                            isActive ? 'block py-2 px-4 text-sm bg-blue-700' : 'block py-2 px-4 text-sm hover:bg-blue-700'
-                        }
-                        onClick={toggleMenu}
-                    >
-                        Products
-                    </NavLink>
+                    {
+                        user && <NavLink
+                            to="/products"
+                            className={({ isActive }) =>
+                                isActive ? 'block py-2 px-4 text-sm bg-blue-700' : 'block py-2 px-4 text-sm hover:bg-blue-700'
+                            }
+                            onClick={toggleMenu}
+                        >
+                            Products
+                        </NavLink>
+                    }
                     <NavLink
                         to="/login"
                         className={({ isActive }) =>
@@ -113,15 +141,25 @@ const Navbar = () => {
                     >
                         Register
                     </NavLink>
-                    <NavLink
-                        to="/profile"
-                        className={({ isActive }) =>
-                            isActive ? 'block py-2 px-4 text-sm bg-blue-700' : 'block py-2 px-4 text-sm hover:bg-blue-700'
-                        }
-                        onClick={toggleMenu}
-                    >
-                        Profile
-                    </NavLink>
+                    {
+                        user && <NavLink
+                            to="/profile"
+                            className={({ isActive }) =>
+                                isActive ? 'block py-2 px-4 text-sm bg-blue-700' : 'block py-2 px-4 text-sm hover:bg-blue-700'
+                            }
+                            onClick={toggleMenu}
+                        >
+                            Profile
+                        </NavLink>
+                    }
+                    {
+                        user && <NavLink
+                            onClick={handleSignOut}
+                            className={'block py-2 px-4 text-sm hover:bg-blue-700'}
+                        >
+                            Sign Out
+                        </NavLink>
+                    }
                 </div>
             )}
         </nav>
