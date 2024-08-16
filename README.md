@@ -1,6 +1,3 @@
-### Frontend Repository: `README.md`
-
-```markdown
 # Product Search Frontend
 
 This project is a frontend web application built with React.js that allows users to search, filter, sort, and paginate through a list of products. The application interacts with a backend API to fetch and display product data.
