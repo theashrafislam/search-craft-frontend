@@ -1,4 +1,4 @@
-# Product Search Frontend
+# Search Craft
 
 This project is a frontend web application built with React.js that allows users to search, filter, sort, and paginate through a list of products. The application interacts with a backend API to fetch and display product data.
 
@@ -21,26 +21,17 @@ This project is a frontend web application built with React.js that allows users
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/frontend-repo.git
+   git clone https://github.com/theashrafislam/search-craft-frontend
    cd frontend-repo
-Install dependencies:
+Install dependencies: npm install
 
-bash
-Copy code
-npm install
-Start the development server:
+Start the development server: npm start
 
-bash
-Copy code
-npm start
 The application should now be running on http://localhost:3000.
 
 Environment Variables
-Create a .env file in the root directory with the following:
+Create a .env file in the root directory with the following: REACT_APP_API_URL=http://localhost:5000
 
-bash
-Copy code
-REACT_APP_API_URL=http://localhost:5000
 This variable points to your backend API, ensuring the frontend can make requests to it.
 
 Running the Project Locally
