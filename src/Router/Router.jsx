@@ -5,6 +5,7 @@ import Products from "../Pages/Products";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import UserProfile from "../Pages/UserProfile";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
     {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/products",
-                element: <Products/>
+                element: <PrivateRouter><Products/></PrivateRouter>
             }
             ,
             {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/profile",
-                element: <UserProfile/>
+                element: <PrivateRouter><UserProfile/></PrivateRouter>
             }
         ]
     },
