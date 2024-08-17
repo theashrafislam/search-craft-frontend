@@ -5,6 +5,7 @@ import { AuthContext } from '../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const Login = () => {
     const { loginUsingEmailPassword, loginWithGoogle } = useContext(AuthContext);
@@ -39,7 +40,11 @@ const Login = () => {
     };
 
     return (
+        <HelmetProvider>
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+        <Helmet>
+        <title>Access Your Account | Search Craft</title>
+      </Helmet>
             <div className="w-full max-w-md p-8 bg-white shadow-2xl rounded-2xl">
                 <h2 className="text-3xl font-extrabold mb-6 text-center text-gray-900">Welcome Back</h2>
 
@@ -98,6 +103,7 @@ const Login = () => {
                 </form>
             </div>
         </div>
+        </HelmetProvider>
     );
 };
 

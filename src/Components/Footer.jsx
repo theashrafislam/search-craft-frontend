@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaFacebook, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Footer = () => {
+  const { user } = useContext(AuthContext)
   return (
     <footer className="bg-gray-800 text-gray-400 py-8 px-4">
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -21,15 +23,26 @@ const Footer = () => {
             <li className="mb-2">
               <Link to="/" className="hover:text-white transition-colors duration-300">Home</Link>
             </li>
-            <li className="mb-2">
-              <Link to="/products" className="hover:text-white transition-colors duration-300">Products</Link>
-            </li>
-            <li className="mb-2">
-              <Link to="/login" className="hover:text-white transition-colors duration-300">Login</Link>
-            </li>
-            <li>
-              <Link to="/register" className="hover:text-white transition-colors duration-300">Register</Link>
-            </li>
+            {
+              user && <>
+                <li className="mb-2">
+                  <Link to="/products" className="hover:text-white transition-colors duration-300">Products</Link>
+                </li>
+                <li className="mb-2">
+                  <Link to="/profile" className="hover:text-white transition-colors duration-300">Profile</Link>
+                </li>
+              </>
+            }
+            {
+              !user && <>
+                <li className="mb-2">
+                  <Link to="/login" className="hover:text-white transition-colors duration-300">Login</Link>
+                </li>
+                <li>
+                  <Link to="/register" className="hover:text-white transition-colors duration-300">Register</Link>
+                </li>
+              </>
+            }
           </ul>
         </div>
 
@@ -46,13 +59,13 @@ const Footer = () => {
           <h3 className="text-white text-lg font-semibold mb-4">Follow Us</h3>
           <div className="flex space-x-4">
             <a href="www.facebook.com/theashrafislam" className="text-gray-400 hover:text-white transition-colors duration-300">
-              <FaFacebook className='text-2xl'/>
+              <FaFacebook className='text-2xl' />
             </a>
             <a href="www.github.com/theashrafislam" className="text-gray-400 hover:text-white transition-colors duration-300">
-              <FaGithub className='text-2xl'/>
+              <FaGithub className='text-2xl' />
             </a>
             <a href="https://www.linkedin.com/in/theashrafislam/" className="text-gray-400 hover:text-white transition-colors duration-300">
-              <FaLinkedin className='text-2xl'/>
+              <FaLinkedin className='text-2xl' />
             </a>
           </div>
         </div>
