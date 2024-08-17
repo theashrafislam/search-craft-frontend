@@ -24,7 +24,7 @@ const Products = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('https://search-craft-backend.vercel.app/information', {
+                const response = await axios.get('https://search-craft-backend-4r21.vercel.app/information', {
                     params: {
                         ...filters,
                         sort,
@@ -47,7 +47,7 @@ const Products = () => {
         setPage(1);
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('https://search-craft-backend.vercel.app/information', {
+                const response = await axios.get('https://search-craft-backend-4r21.vercel.app/information', {
                     params: {
                         ...filters,
                         sort,
